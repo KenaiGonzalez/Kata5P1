@@ -10,6 +10,7 @@ public class Kata5P1 {
 
     public static void main(String[] args) {
         new Kata5P1().selectAllPeople();
+        new Kata5P1().createTableEmail();
         
     }
     private Connection connect(String database){
@@ -39,6 +40,23 @@ public class Kata5P1 {
             conn.close();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
+        }
+    }
+    
+    private void createTableEmail(){
+        Connection conn = connect("Kata5.db");
+        String sql = "CREATE TABLE \"EMAIL\" (\n" +
+        "	\"Id\"	INTEGER,\n" +
+        "	\"Mail\"	TEXT NOT NULL,\n" +
+        "	PRIMARY KEY(\"Id\" AUTOINCREMENT)\n" +
+        ")";
+        try{
+            Statement stmt = conn.createStatement();
+            stmt.execute(sql);
+            System.out.println("Tabla creada");
+            conn.close();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
         }
     }
 }
